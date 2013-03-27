@@ -1,0 +1,10 @@
+<?php 
+ 	error_reporting(E_ALL);
+	include 'lib/api-website-v1.php';
+	
+	define('MAPAPROP_TOKEN', 'HcrpQAYQWdnx13CGmzhl3uvHZqb9Pfe2hIu3F4lgUR4lZjOLObfFEJyLvwyjruphuDNLHPUSq4i5RyCMsoz5u1MhM81u64LYkKec');
+	$API = new MapapropAPI();
+	
+	$response = $API->submitQuestion('1-434', 'Raul Alamar', 'raul.alamar@gmail.com', '838-1282-3322', 'Me interesa esta propiedad');
+	echo $response;
+?>
