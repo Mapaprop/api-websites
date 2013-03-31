@@ -5,6 +5,10 @@
 	define('MAPAPROP_TOKEN', 'HcrpQAYQWdnx13CGmzhl3uvHZqb9Pfe2hIu3F4lgUR4lZjOLObfFEJyLvwyjruphuDNLHPUSq4i5RyCMsoz5u1MhM81u64LYkKec');
 	$API = new MapapropAPI();
 	
-	$response = $API->queryProperty('1-434');
+	$code = '1-434';
+	$seoUrl = 'venta-de-departamento-en-floresta-capital-federal-1-10891';
+	
+// 	$response = $API->queryProperty($code, null);
+	$response = $API->queryProperty(null, $seoUrl);
 	echo $response;
 ?>

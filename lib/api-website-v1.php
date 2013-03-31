@@ -7,13 +7,41 @@
 class MapapropAPI {
 	
 	public $VERSION= "1";
-// 	private $url = "https://gestion.mapaprop.com/action/api-website-v1/";
-	private $URL = "https://localhost:8443/action/api-website-v1/";
+	private $url = "https://gestion.mapaprop.com/action/api-website-v1/";
+// 	private $URL = "https://localhost:8443/action/api-website-v1/";
 	
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //																		public methods
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * @doc http://www.mapaprop.com/ayuda/?page_id=2149
+	 * @param unknown $zone1
+	 * @param unknown $zone2
+	 * @param unknown $zone3
+	 * @param unknown $priceFrom
+	 * @param unknown $priceTo
+	 * @param unknown $currency
+	 * @param unknown $operation
+	 * @param unknown $type
+	 * @param unknown $page
+	 */
+	public function search($zone1, $zone2, $zone3, $priceFrom, $priceTo, $currency, $operation, $type, $page) {
+		$fields = array(
+				'token'=>MAPAPROP_TOKEN,
+				'zone1'=>$zone1,
+				'zone2'=>$zone2,
+				'zone3'=>$zone3,
+				'priceFrom'=>$priceFrom,
+				'priceTo'=>$priceTo,
+				'currency'=>$currency,
+				'operation'=>$operation,
+				'type'=>$type,
+				'page'=>$page
+		);
+		return $this->post('search', $fields);
+	}
 	
 	/**
 	 * @doc http://www.mapaprop.com/ayuda/?page_id=2136
@@ -39,10 +67,11 @@ class MapapropAPI {
 	 * @doc http://www.mapaprop.com/ayuda/?page_id=2138
 	 * @param unknown $code
 	 */
-	public function queryProperty($code) {
+	public function queryProperty($code, $seoUrl) {
 		$fields = array(
 				'token'=>MAPAPROP_TOKEN,
-				'code'=>$code
+				'code'=>$code,
+				'seoUrl'=>$seoUrl
 		);
 		return $this->post('query-property', $fields);
 	}
@@ -112,29 +141,6 @@ class MapapropAPI {
 		return $this->post("submit-question", $fields);
 	}
 
-	/*
-	 * Submit the contact form, all variables are required
-	*/
-	public function submitContact($name, $subject, $email, $phone, $text) {
-		$this->checkEnvironment();
-		$domain = $this->getDomain();
-		$referer = $this->getReferer();
-		$ip = $this->getRemoteAddress();
-		$userAgent = $this->getUserAgent();
-		$fields = array(
-				'name'=>$name,
-				'subject'=>$subject,
-				'email'=>$email,
-				'phone'=>$phone,
-				'text'=>$text,
-				'domain'=>$domain,
-				'referer'=>$referer,
-				'userAgent'=>$userAgent,
-				'ip'=>$ip
-		);
-		return $this->post("submit-contact", $fields);
-	}
-
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	//																non public methods
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,8 +163,7 @@ class MapapropAPI {
 			//open connection
 			$ch = curl_init();
 		
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); //TODO make it true
-			curl_setopt($ch, CURLOPT_VERBOSE, true); //TODO remove
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); //TODO make it true for prod
 			curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
