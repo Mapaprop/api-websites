@@ -7,7 +7,7 @@
 class MapapropAPI {
 	
 	public $VERSION= "1";
-	private $url = "https://gestion.mapaprop.com/action/api-website-v1/";
+	private $URL = "https://gestion.mapaprop.com/action/api-website-v1/";
 // 	private $URL = "https://localhost:8443/action/api-website-v1/";
 	
 	
