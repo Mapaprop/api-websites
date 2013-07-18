@@ -1,9 +1,6 @@
-api-websites
-============
+h1. api-websites
 
-Mapaprop API for websites
-
-==Full API reference==
+h2. Mapaprop API for websites
 
 http://www.mapaprop.com/ayuda/?page_id=2073
 

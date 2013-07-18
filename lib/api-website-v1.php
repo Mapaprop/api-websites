@@ -119,8 +119,9 @@ class MapapropAPI {
 	 * @param unknown $email
 	 * @param unknown $phone
 	 * @param unknown $text
+	 * @param String $url
 	 */
-	public function submitQuestion($code, $name, $email, $phone, $text) {
+	public function submitQuestion($code, $name, $email, $phone, $text, $url) {
 		$this->checkEnvironment();
 		$domain = $this->getDomain();
 		$referer = $this->getReferer();
@@ -136,6 +137,7 @@ class MapapropAPI {
 				'domain'=>$domain,
 				'referer'=>$referer,
 				'userAgent'=>$userAgent,
+				'url'=>$url,
 				'ip'=>$ip
 		);
 		return $this->post("submit-question", $fields);
